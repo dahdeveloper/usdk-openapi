@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 28
+        versionCode 410326
+        versionName "4.1.0326"
+
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api files('libs/platform_sdk_v4.1.0326.jar')
+}
+/*
+apply plugin: 'maven'
+uploadArchives {
+    repositories.mavenDeployer {
+        def mavenDirPath = file('~/workspace/workspace/UrovoSDK/') // 本地存放目录(自行选择)，可放在gradle.properties文件中引用
+        repository(url:"file://${mavenDirPath.absolutePath}") // 必须双引号，单引号不会转义$
+        pom.project {
+            groupId "com.ubx.usdk" // 可以随意取，一般取包名
+            artifactId "usdk-openapi" // 可以随意取，一般取库的名字
+            version "4.1.0326" // 版本号
+        }
+    }
+}*/
